@@ -70,7 +70,6 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-4">
             <Button
               variant="ghost"
-              size="icon"
               className="relative hover:bg-gray-100"
             >
               <Bell className="w-5 h-5 text-gray-600" />

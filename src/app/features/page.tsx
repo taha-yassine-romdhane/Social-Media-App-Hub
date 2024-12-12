@@ -126,12 +126,16 @@ export default function FeaturesPage() {
             to grow their presence.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Button href="/auth/signup" size="lg">
-              Start free trial
-            </Button>
-            <Button href="/pricing" variant="outline" size="lg">
-              View pricing
-            </Button>
+            <a href="/auth/signup">
+              <Button size="lg">
+                Start free trial
+              </Button>
+            </a>
+            <a href="/pricing">
+              <Button variant="outline" size="lg">
+                View pricing
+              </Button>
+            </a>
           </div>
         </div>
       </div>

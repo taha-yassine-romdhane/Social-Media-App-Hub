@@ -23,9 +23,11 @@ export function NavbarWrapper() {
   if (isDashboardPage) return null
 
   const navLinks = [
-    { name: 'Features', href: '/#features' },
-    { name: 'Pricing', href: '/#pricing' },
-    { name: 'About', href: '/#about' },
+    { name: 'Features', href: '/features' },
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'About', href: '/about' },
+    { name: 'Sign In', href: '/sign-in' },
+    { name: 'Sign Up', href: '/sign-up' },
   ]
 
   return (

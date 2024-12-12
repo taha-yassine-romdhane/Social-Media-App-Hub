@@ -30,28 +30,38 @@ export default function AccountsPage() {
 
   const fetchAccounts = async () => {
     try {
-      // Get the current user's session
-      const { data: { session } } = await supabase.auth.getSession()
+      setLoading(true);
+  
+      // Get the current user's session (you may replace this with your own authentication logic)
+      const session = await getSession();  // Assume `getSession` is a function that gets the current user session
       if (!session) {
-        throw new Error('Not authenticated')
+        throw new Error('Not authenticated');
       }
-
-      // Only fetch accounts belonging to the current user
-      const { data, error } = await supabase
-        .from('social_accounts')
-        .select('*')
-        .eq('user_id', session.user.id)
-        .order('created_at', { ascending: false })
-
-      if (error) throw error
-      setAccounts(data || [])
+  
+      // Fetch accounts from your API endpoint
+      const response = await fetch(`/api/social_accounts?user_id=${session.user.id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // Include any authorization token if necessary
+          'Authorization': `Bearer ${session.token}`
+        }
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch accounts');
+      }
+  
+      const data = await response.json();
+      setAccounts(data || []);
     } catch (error) {
-      console.error('Error fetching accounts:', error)
-      toast.error('Failed to fetch connected accounts')
+      console.error('Error fetching accounts:', error);
+      toast.error('Failed to fetch connected accounts');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
+  
 
   const handleFacebookConnect = async () => {
     if (!isLoaded) {
